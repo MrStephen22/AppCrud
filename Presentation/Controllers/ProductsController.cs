@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace AppCrud.Presentation.Controllers
 {
     [ApiController]
-    [Route("api/products")]
+    [Route("api/v1/products")]
     public class ProductsController : ControllerBase
     {
         private readonly CreateProductUseCase _create;
@@ -106,7 +106,14 @@ namespace AppCrud.Presentation.Controllers
                     Success = true,
                     Message = "Productos obtenidos correctamente",
                     StatusCode = 200,
-                    Data = result
+                    Data = result.Data,
+                    Pagination = new
+                    {
+                        result.TotalRecords,
+                        result.Page,
+                        result.Limit,
+                        result.TotalPages
+                    }
                 });
             }
             catch (Exception ex)

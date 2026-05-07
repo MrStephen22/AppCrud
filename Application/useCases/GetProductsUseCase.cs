@@ -13,7 +13,7 @@ namespace AppCrud.Application.useCases
             _repo = repo;
         }
 
-        public async Task<object> Execute(ProductQueryDto queryDto)
+        public async Task<PaginatedResultDto<Product>> Execute(ProductQueryDto queryDto)
         {
             if (queryDto.Page <= 0)
                 queryDto.Page = 1;
@@ -24,13 +24,13 @@ namespace AppCrud.Application.useCases
             var (products, totalRecords) =
                 await _repo.GetPaginatedFiltered(queryDto);
 
-            return new
+            return new PaginatedResultDto<Product>
             {
-                data = products,
-                totalRecords,
-                page = queryDto.Page,
-                limit = queryDto.Limit,
-                totalPages = (int)Math.Ceiling(
+                Data = products.ToList(),
+                TotalRecords = totalRecords,
+                Page = queryDto.Page,
+                Limit = queryDto.Limit,
+                TotalPages = (int)Math.Ceiling(
                     (double)totalRecords / queryDto.Limit)
             };
         }

@@ -68,6 +68,8 @@ namespace AppCrud.Infraestructure.Persistence
                 {
                     Id = 1,
                     Username = "admin",
+                    FirstName = "Pepito",
+                    LastName = "Perez",
                     PasswordHash = BCrypt.Net.BCrypt.HashPassword("123456")
                 }
     );

@@ -9,5 +9,7 @@
         public int StatusCode { get; set; }
 
         public T? Data { get; set; }
+
+        public object? Pagination { get; set; }
     }
 }

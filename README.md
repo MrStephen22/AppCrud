@@ -192,6 +192,46 @@ dotnet run
 
 ---
 
+# Autenticación JWT
+
+La API implementa autenticación basada en JWT (JSON Web Token).
+
+---
+
+# Login
+
+## Endpoint
+
+```bash
+POST /api/v1/auth/login
+```
+
+---
+
+## Credenciales de prueba
+
+```json
+{
+  "username": "admin",
+  "password": "123456"
+}
+```
+
+---
+
+## Ejemplo de request
+
+```json
+{
+  "username": "admin",
+  "password": "123456"
+}
+```
+
+---
+
+
+
 # Swagger
 
 Swagger estará disponible en:
@@ -206,18 +246,18 @@ https://localhost:{puerto}/swagger
 
 | Método | Endpoint | Descripción |
 |---|---|---|
-| GET | `/api/products` | Obtener productos |
-| GET | `/api/products/{id}` | Obtener producto por ID |
-| POST | `/api/products` | Crear producto |
-| PUT | `/api/products/{id}` | Actualizar producto |
-| DELETE | `/api/products/{id}` | Eliminar producto |
+| GET | `/api/v1/products` | Obtener productos |
+| GET | `/api/v1/products/{id}` | Obtener producto por ID |
+| POST | `/api/v1/products` | Crear producto |
+| PUT | `/api/v1/products/{id}` | Actualizar producto |
+| DELETE | `/api/v1/products/{id}` | Eliminar producto |
 
 ---
 
 # Ejemplo de búsqueda con filtros
 
 ```bash
-/api/products?filter=name&query=Mouse&page=1&limit=5
+/api/v1/products?filter=name&query=Mouse&page=1&limit=5
 ```
 
 ---

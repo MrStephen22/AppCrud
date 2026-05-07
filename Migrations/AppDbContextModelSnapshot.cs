@@ -98,6 +98,14 @@ namespace AppCrud.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("PasswordHash")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -114,7 +122,9 @@ namespace AppCrud.Migrations
                         new
                         {
                             Id = 1,
-                            PasswordHash = "$2a$11$83bRjyCJoI/lgAtQAPO49OGRFslUQR5yWrnqrTsNxwzpjqxSLjnVG",
+                            FirstName = "Pepito",
+                            LastName = "Perez",
+                            PasswordHash = "$2a$11$VjwH/CEmfdKTEJBdAj242OVDkWMoxu7RiKvPAJ.aahklAKMn725Ey",
                             Username = "admin"
                         });
                 });
