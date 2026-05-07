@@ -1,4 +1,5 @@
-﻿using AppCrud.Domain.Entities;
+﻿using AppCrud.Application.DTOs;
+using AppCrud.Domain.Entities;
 using AppCrud.Domain.Interfaces;
 using AppCrud.Infraestructure.Persistence;
 using Microsoft.EntityFrameworkCore;
@@ -13,8 +14,46 @@ namespace AppCrud.Infraestructure.Repositories
         {
             _context = context;
         }
-        public async Task<IEnumerable<Product>> GetAll()
-        => await _context.Products.ToListAsync();
+        public async Task<(IEnumerable<Product>, int totalRecords)>
+            GetPaginatedFiltered(ProductQueryDto queryDto)
+        {
+            var query = _context.Products.AsQueryable();
+
+            switch (queryDto.Filter.ToLower())
+            {
+                case "name":
+                    query = query.Where(p =>
+                        p.Name.ToLower()
+                        .Contains(queryDto.Query.ToLower()));
+                    break;
+
+                case "category":
+                    query = query.Where(p =>
+                        p.Category.ToLower()
+                        .Contains(queryDto.Query.ToLower()));
+                    break;
+
+                case "sku":
+                    query = query.Where(p =>
+                        p.Sku.ToLower()
+                        .Contains(queryDto.Query.ToLower()));
+                    break;
+
+                case "all":
+                default:
+                    // No aplicar filtro
+                    break;
+            }
+
+            var totalRecords = await query.CountAsync();
+
+            var products = await query
+                .Skip((queryDto.Page - 1) * queryDto.Limit)
+                .Take(queryDto.Limit)
+                .ToListAsync();
+
+            return (products, totalRecords);
+        }
 
         public async Task<Product?> GetById(int id)
             => await _context.Products.FindAsync(id);

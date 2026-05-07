@@ -18,6 +18,8 @@ builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<CreateProductUseCase>();
 builder.Services.AddScoped<GetProductsUseCase>();
 builder.Services.AddScoped<GetProductByIdUseCase>();
+builder.Services.AddScoped<UpdateProductUseCase>();
+builder.Services.AddScoped<DeleteProductUseCase>();
 
 // Swagger
 builder.Services.AddEndpointsApiExplorer();
