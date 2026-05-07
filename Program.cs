@@ -20,6 +20,8 @@ builder.Services.AddScoped<GetProductsUseCase>();
 builder.Services.AddScoped<GetProductByIdUseCase>();
 builder.Services.AddScoped<UpdateProductUseCase>();
 builder.Services.AddScoped<DeleteProductUseCase>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<LoginUseCase>();
 
 // Swagger
 builder.Services.AddEndpointsApiExplorer();

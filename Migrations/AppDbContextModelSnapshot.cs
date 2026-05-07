@@ -91,6 +91,33 @@ namespace AppCrud.Migrations
                             Stock = 3
                         });
                 });
+
+            modelBuilder.Entity("AppCrud.Domain.Entities.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("PasswordHash")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            PasswordHash = "$2a$11$83bRjyCJoI/lgAtQAPO49OGRFslUQR5yWrnqrTsNxwzpjqxSLjnVG",
+                            Username = "admin"
+                        });
+                });
 #pragma warning restore 612, 618
         }
     }

@@ -8,6 +8,7 @@ namespace AppCrud.Infraestructure.Persistence
     public class AppDbContext : DbContext
     {
         public DbSet<Product> Products => Set<Product>();
+        public DbSet<User> Users => Set<User>();
 
         public AppDbContext(DbContextOptions<AppDbContext> options)
         : base(options) { }
@@ -61,6 +62,15 @@ namespace AppCrud.Infraestructure.Persistence
                     Category = "Muebles"
                 }
             );
+
+            modelBuilder.Entity<User>().HasData(
+                new User
+                {
+                    Id = 1,
+                    Username = "admin",
+                    PasswordHash = BCrypt.Net.BCrypt.HashPassword("123456")
+                }
+    );
         }
     }
 }
